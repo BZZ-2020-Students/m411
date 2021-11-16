@@ -23,7 +23,7 @@ public class ZahlenKonverter {
                 number = Integer.parseInt(numberString);
                 validNumber = true;
             } catch (NumberFormatException e) {
-                System.out.println("Dies ist keine gültige Zahl!");
+                System.err.println("Dies ist keine gültige Zahl!");
             }
         }
         return number;

@@ -3,7 +3,9 @@ package numberconverter;
 import java.util.Scanner;
 
 public class Zahlenkonverter {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+    private final String ALL_DIGITS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
     public static void main(String[] args) {
         Zahlenkonverter zk = new Zahlenkonverter();
         zk.interaction();
@@ -11,26 +13,36 @@ public class Zahlenkonverter {
 
     public void interaction(){
         String input = "";
-        int numberToConvert;
-        int systemroot;
-        do {
-            System.out.print("Welche Zahl soll in ein anders System umgewandelt werden > ");
-            input = scanner.nextLine();
-        }while(!validInput(input));
-        numberToConvert =  Integer.parseInt(input);
+        String numberToConvert;
+        int systemrootFrom;
+        int systemrootTo;
+        System.out.print("Geben Sie eine Zahl ein > ");
+        numberToConvert = scanner.nextLine();
 
         do {
-            System.out.print("In welches System soll diese Zahl umgewandelt werden > ");
+            System.out.print("In welchem System wurde diese Zahl eingegeben > ");
             input = scanner.nextLine();
         }while(!validInput(input));
-        systemroot =  Integer.parseInt(input);
-        System.out.println("In Bin with libary: " + Integer.toBinaryString(numberToConvert));
-        System.out.println("In Hex with libary: " + Integer.toHexString(numberToConvert));
-        System.out.println("In Bin Aufgabe 2: " + convertDezToBinary(numberToConvert));
-        System.out.println("In Hex Aufgabe 2: " + convertDezToHex(numberToConvert));
-        System.out.println(numberToConvert + " ist im " + systemroot + "er System "  +convertDezToAny(numberToConvert,systemroot));
-
+        systemrootFrom =  Integer.parseInt(input);
+        do {
+            System.out.print("In welchem System soll diese Zahl umgewandelt werden > ");
+            input = scanner.nextLine();
+        }while(!validInput(input));
+        systemrootTo =  Integer.parseInt(input);
+        System.out.println(numberToConvert + " ist im " + systemrootFrom + "er System "  + convertDezToAny(toDec(numberToConvert,systemrootFrom),systemrootTo));
     }
+
+    public int toDec(String number, int systemroot) {
+        number = number.toUpperCase();
+        int resDez = 0;
+        for (int i = 0; i < number.length(); i++) {
+            char c = number.charAt(i);
+            int d = ALL_DIGITS.indexOf(c);
+            resDez = systemroot * resDez + d;
+        }
+        return resDez;
+    }
+
 
     public String convertDezToAny(int dez, int systemRoot){
         int tempInput = dez;
