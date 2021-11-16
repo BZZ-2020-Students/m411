@@ -1,4 +1,4 @@
-package numberconvertet;
+package numberconverter;
 
 import java.util.Scanner;
 
@@ -27,14 +27,12 @@ public class Zahlenkonverter {
         int tempInput = dez;
         StringBuilder hexString = new StringBuilder();
         while(tempInput > 16){
-            System.out.println(tempInput);
             int tempInt = tempInput % 16;
             hexString.append(checkLargerThenTen(tempInt));
             tempInput /= 16;
         }
         hexString.append(checkLargerThenTen(tempInput));
-        String finalHexString = String.valueOf(new StringBuilder(hexString).reverse());
-        return finalHexString;
+        return String.valueOf(new StringBuilder(hexString).reverse());
     }
 
     public String checkLargerThenTen(int input){
@@ -54,8 +52,7 @@ public class Zahlenkonverter {
             tempInput /= 2;
         }
         binaryString.append(tempInput);
-        String finalBinaryString = String.valueOf(new StringBuilder(binaryString).reverse());
-        return finalBinaryString;
+        return String.valueOf(new StringBuilder(binaryString).reverse());
     }
 
     public boolean validInput(String unparsedInput){

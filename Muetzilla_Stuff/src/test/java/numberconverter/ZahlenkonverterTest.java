@@ -1,11 +1,10 @@
-package numberconvertet;
+package numberconverter;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ZahlenkonverterTest {
-
     @Test
     public void TestBinary1(){
         Zahlenkonverter zk = new Zahlenkonverter();
@@ -31,6 +30,4 @@ class ZahlenkonverterTest {
         Zahlenkonverter zk = new Zahlenkonverter();
         assertEquals(Integer.toHexString(174), zk.convertDezToHex(174));
     }
-
-
 }
