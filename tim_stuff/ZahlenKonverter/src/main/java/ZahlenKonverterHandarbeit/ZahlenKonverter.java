@@ -5,23 +5,28 @@ import java.util.Scanner;
 
 public class ZahlenKonverter {
     public ZahlenKonverter() {
+        int number = validInt("Bitte eine Zahl eingeben: ");
+        int numberSystem = validInt("Bitte ein Zahlensystem angeben (2-36): ");
+        System.out.println("Ihre Zahl: " + number);
+        System.out.println("Ihre Zahl mit Basis von " + numberSystem + ": " + convert(number, numberSystem));
+    }
+
+    public int validInt(String message) {
         boolean validNumber = false;
         Scanner scanner = new Scanner(System.in);
+        int number = -1;
         while (!validNumber) {
-            System.out.print("Bitte eine Zahl eingeben: ");
+            System.out.print(message);
             String numberString = scanner.nextLine();
 
             try {
-                int number = Integer.parseInt(numberString);
+                number = Integer.parseInt(numberString);
                 validNumber = true;
-
-                System.out.println("Ihre Zahl: " + number);
-                System.out.println("In Hex: " + convert(number, 16));
-                System.out.println("In Bin: " + convert(number, 2));
             } catch (NumberFormatException e) {
                 System.out.println("Dies ist keine gültige Zahl!");
             }
         }
+        return number;
     }
 
     public String convert(int number, int numberSystem) {
