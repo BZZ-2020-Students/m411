@@ -11,8 +11,12 @@ public class ZahlenKonverter {
             String numberString = scanner.nextLine();
 
             try {
-                float number = Float.parseFloat(numberString);
+                int number = Integer.parseInt(numberString);
                 validNumber = true;
+
+                System.out.println("Ihre Zahl: " + number);
+                System.out.println("In Hex: " + Integer.toString(number, 16));
+                System.out.println("In Bin: " + Integer.toString(number, 2));
             } catch (NumberFormatException e) {
                 System.out.println("Dies ist keine gültige Zahl!");
             }
