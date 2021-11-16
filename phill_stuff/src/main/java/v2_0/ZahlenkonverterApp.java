@@ -5,7 +5,7 @@ public class ZahlenkonverterApp {
         String eingegebeneZahl;
         Zahlenkonverter konverter = new Zahlenkonverter();
         eingegebeneZahl = konverter.Usereingaben();
-
+ 
         konverter.convert(eingegebeneZahl);
         konverter.printAllNumbers();
     }
