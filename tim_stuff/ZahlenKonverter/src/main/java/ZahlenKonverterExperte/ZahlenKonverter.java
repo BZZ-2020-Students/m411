@@ -11,7 +11,7 @@ public class ZahlenKonverter {
 
     public ZahlenKonverter() {
         int whatToDo = validInt("""
-                (1) Dezimal zu andere
+                (1) Dezimal zu anderes
                 (2) anderes zu Dezimal
                 (3) anderes zu anderes
                 >\s""");
