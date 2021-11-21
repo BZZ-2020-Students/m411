@@ -30,7 +30,7 @@ public class ZahlenKonverter {
                 System.out.print("Bitte ihre Zahl eingeben: ");
                 otherNumber = scanner.nextLine();
                 numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                System.out.println("Ihre Zahl: " + otherNumber + " mit Basis von " + numberSystem);
+                System.out.println("Ihre Zahl mit Basis von '" + numberSystem + "': '" + otherNumber + "' ");
                 System.out.println("Ihre Zahl in Dezimal: " + convertToDecimal(otherNumber, numberSystem));
             }
             case 3 -> {
@@ -38,7 +38,7 @@ public class ZahlenKonverter {
                 otherNumber = scanner.nextLine();
                 numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
                 int secondNumberSystem = validInt("Bitte das Zahlensystem angeben in der Sie ihre Zahl umwandeln wollen angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                System.out.println("Ihre Zahl: '" + otherNumber + "' mit Basis von '" + numberSystem + "'");
+                System.out.println("Ihre Zahl mit Basis von '" + numberSystem + "': '" + otherNumber + "' ");
                 System.out.println("Ihre Zahl mit Basis von '" + secondNumberSystem + "': " + convertOtherToOther(otherNumber, numberSystem, secondNumberSystem));
             }
         }
