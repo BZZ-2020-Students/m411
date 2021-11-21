@@ -40,12 +40,13 @@ public class ZahlenKonverter {
                     System.out.print("Bitte ihre Zahl eingeben: ");
                     otherNumber = scanner.nextLine();
                     numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                    int secondNumberSystem = validInt("Bitte das Zahlensystem angeben in der Sie ihre Zahl umwandeln wollen angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
+                    int secondNumberSystem = validInt("Bitte das Zahlensystem angeben in der Sie ihre Zahl umwandeln wollen (" + MIN_BASE + "-" + MAX_BASE + "): ");
                     System.out.println("Ihre Zahl mit Basis von '" + numberSystem + "': '" + otherNumber + "' ");
                     System.out.println("Ihre Zahl mit Basis von '" + secondNumberSystem + "': " + convertOtherToOther(otherNumber, numberSystem, secondNumberSystem));
                 }
                 case 4 -> exit = true;
             }
+            System.out.println();
         }
         System.out.println("Auf wiedersehen!");
     }
@@ -61,7 +62,7 @@ public class ZahlenKonverter {
                 number = Integer.parseInt(numberString);
                 validNumber = true;
             } catch (NumberFormatException e) {
-                System.err.println("Dies ist keine gültige Zahl!");
+                System.out.println("Dies ist keine gültige Zahl!");
             }
         }
         return number;
