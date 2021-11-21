@@ -93,10 +93,10 @@ public class ZahlenKonverter {
         // Source: https://www.tutorialspoint.com/computer_logical_organization/number_system_conversion.htm
         if (numberSystem == 10) {
             return "" + number;
-        } else if (numberSystem < 2) {
-            numberSystem = 2;
-        } else if (numberSystem > 36) {
-            numberSystem = 36;
+        } else if (numberSystem < MIN_BASE) {
+            numberSystem = MIN_BASE;
+        } else if (numberSystem > MAX_BASE) {
+            numberSystem = MAX_BASE;
         }
         int result = number / numberSystem;
         int remainder = number % numberSystem;
