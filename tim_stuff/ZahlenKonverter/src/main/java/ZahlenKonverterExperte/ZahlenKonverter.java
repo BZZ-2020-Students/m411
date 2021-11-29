@@ -120,7 +120,7 @@ public class ZahlenKonverter {
             int num = newNumbers.get(i);
             String numString = "" + num;
             if (num > 9) {
-                numString = "" + (char) (65 + (num - 10));
+                numString = "" + (char) (num + 55);
             }
 
             newNumber.append(numString);
