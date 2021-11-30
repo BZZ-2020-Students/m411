@@ -2,10 +2,6 @@ package LB01;
 
 public class ZahlenSorter {
     public static void main(String[] args) {
-        // Declare local variables here
-
-        // Initialise local variables here
-
         int[] zahlen = new int[4];
         zahlen[0] = 23;
         zahlen[1] = 56;
