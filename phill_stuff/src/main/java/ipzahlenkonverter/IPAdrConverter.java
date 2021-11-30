@@ -53,8 +53,8 @@ public class IPAdrConverter implements IPAdrConverterIF {
     String[] hexarray = new String[array.length];
     String[] binarray = new String[array.length];
     for (int i = 0; i < array.length; i++) {
-      hexarray[i] = String.format("%2s", Integer.toHexString(Integer.parseInt(array[i]))).replace(' ', '-');
-      binarray[i] = String.format("%8s", Integer.toBinaryString(Integer.parseInt(array[i]))).replace(' ', '-');
+      hexarray[i] = String.format("%2s", Integer.toHexString(Integer.parseInt(array[i]))).replace(' ', '0');
+      binarray[i] = String.format("%8s", Integer.toBinaryString(Integer.parseInt(array[i]))).replace(' ', '0');
     }
 
     binFormat = String.join("-", binarray);
