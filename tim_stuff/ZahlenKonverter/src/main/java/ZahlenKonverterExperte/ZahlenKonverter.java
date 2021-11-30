@@ -10,38 +10,45 @@ public class ZahlenKonverter {
     private final int MAX_BASE = 36;
 
     public ZahlenKonverter() {
-        int whatToDo = validInt("""
-                (1) Dezimal zu andere
-                (2) anderes zu Dezimal
-                (3) anderes zu anderes
-                >\s""");
+        boolean exit = false;
+        while (!exit) {
+            int whatToDo = validInt("""
+                    (1) Dezimal zu anderes
+                    (2) Anderes zu Dezimal
+                    (3) Anderes zu anderes
+                    (4) Beenden
+                    >\s""");
 
-        int number = 0;
-        int numberSystem = 0;
-        String otherNumber = "";
-        switch (whatToDo) {
-            case 1 -> {
-                number = validInt("Bitte ihre Zahl eingeben: ");
-                numberSystem = validInt("Bitte ein Zahlensystem angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                System.out.println("Ihre Zahl: " + number);
-                System.out.println("Ihre Zahl mit Basis von " + numberSystem + ": " + convertToOtherBaseSystem(number, numberSystem));
+            int number;
+            int numberSystem;
+            String otherNumber;
+            switch (whatToDo) {
+                case 1 -> {
+                    number = validInt("Bitte ihre Zahl eingeben: ");
+                    numberSystem = validInt("Bitte ein Zahlensystem angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
+                    System.out.println("Ihre Zahl: " + number);
+                    System.out.println("Ihre Zahl mit Basis von " + numberSystem + ": " + convertToOtherBaseSystem(number, numberSystem));
+                }
+                case 2 -> {
+                    System.out.print("Bitte ihre Zahl eingeben: ");
+                    otherNumber = scanner.nextLine();
+                    numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
+                    System.out.println("Ihre Zahl mit Basis von '" + numberSystem + "': '" + otherNumber + "' ");
+                    System.out.println("Ihre Zahl in Dezimal: " + convertToDecimal(otherNumber, numberSystem));
+                }
+                case 3 -> {
+                    System.out.print("Bitte ihre Zahl eingeben: ");
+                    otherNumber = scanner.nextLine();
+                    numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
+                    int secondNumberSystem = validInt("Bitte das Zahlensystem angeben in der Sie ihre Zahl umwandeln wollen (" + MIN_BASE + "-" + MAX_BASE + "): ");
+                    System.out.println("Ihre Zahl mit Basis von '" + numberSystem + "': '" + otherNumber + "' ");
+                    System.out.println("Ihre Zahl mit Basis von '" + secondNumberSystem + "': " + convertOtherToOther(otherNumber, numberSystem, secondNumberSystem));
+                }
+                case 4 -> exit = true;
             }
-            case 2 -> {
-                System.out.print("Bitte ihre Zahl eingeben: ");
-                otherNumber = scanner.nextLine();
-                numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                System.out.println("Ihre Zahl: " + otherNumber + " mit Basis von " + numberSystem);
-                System.out.println("Ihre Zahl in Dezimal: " + convertToDecimal(otherNumber, numberSystem));
-            }
-            case 3 -> {
-                System.out.print("Bitte ihre Zahl eingeben: ");
-                otherNumber = scanner.nextLine();
-                numberSystem = validInt("Bitte das Zahlensystem der Zahl angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                int secondNumberSystem = validInt("Bitte das Zahlensystem angeben in der Sie ihre Zahl umwandeln wollen angeben (" + MIN_BASE + "-" + MAX_BASE + "): ");
-                System.out.println("Ihre Zahl: '" + otherNumber + "' mit Basis von '" + numberSystem + "'");
-                System.out.println("Ihre Zahl mit Basis von '" + secondNumberSystem + "': " + convertOtherToOther(otherNumber, numberSystem, secondNumberSystem));
-            }
+            System.out.println();
         }
+        System.out.println("Auf wiedersehen!");
     }
 
     public int validInt(String message) {
@@ -55,7 +62,7 @@ public class ZahlenKonverter {
                 number = Integer.parseInt(numberString);
                 validNumber = true;
             } catch (NumberFormatException e) {
-                System.err.println("Dies ist keine gültige Zahl!");
+                System.out.println("Dies ist keine gültige Zahl!");
             }
         }
         return number;
@@ -74,7 +81,7 @@ public class ZahlenKonverter {
         int baseCounter = otherBaseNumber.length() - 1;
         int result = 0;
         for (char c : chars) {
-            int num = 0;
+            int num;
             int charToIntOffset = 49;
             int charToIntOffsetAdder = 1;
             if (c > 57) {
@@ -93,12 +100,12 @@ public class ZahlenKonverter {
         // Source: https://www.tutorialspoint.com/computer_logical_organization/number_system_conversion.htm
         if (numberSystem == 10) {
             return "" + number;
-        } else if (numberSystem < 2) {
-            numberSystem = 2;
-        } else if (numberSystem > 36) {
-            numberSystem = 36;
+        } else if (numberSystem < MIN_BASE) {
+            numberSystem = MIN_BASE;
+        } else if (numberSystem > MAX_BASE) {
+            numberSystem = MAX_BASE;
         }
-        int result = number / numberSystem;
+        int result = number / numberSystem; // :)<3
         int remainder = number % numberSystem;
         StringBuilder newNumber = new StringBuilder();
         ArrayList<Integer> newNumbers = new ArrayList<>();
@@ -113,7 +120,7 @@ public class ZahlenKonverter {
             int num = newNumbers.get(i);
             String numString = "" + num;
             if (num > 9) {
-                numString = "" + (char) (65 + (num - 10));
+                numString = "" + (char) (num + 55);
             }
 
             newNumber.append(numString);
