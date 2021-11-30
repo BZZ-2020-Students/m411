@@ -1,6 +1,9 @@
 package IP_Adress_Converter;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 /**
  * Hauptklasse der Anwendung IP-Adress Converter.
@@ -24,7 +27,7 @@ import java.util.Vector;
 public class IPAdrConverter implements IPAdrConverterIF {
 
     private Vector<IPAdrConverterListener> listener;
-    private String binFormat, hexFormat;
+    private String binFormat = "", hexFormat = "";
 
     /**
      * Erstellt die Hauptklasse für die Umrechunung einer IP-Adresse in ein
@@ -33,7 +36,7 @@ public class IPAdrConverter implements IPAdrConverterIF {
      * Für die Registrierung der Listener wird ein Vector vorbereitet.
      */
     public IPAdrConverter() {
-        listener = new Vector<IPAdrConverterListener>();
+        listener = new Vector<>();
     }
 
     /**
@@ -60,22 +63,28 @@ public class IPAdrConverter implements IPAdrConverterIF {
      * @throws IPFormatException signalisiert ein ungültiges IP-Format
      */
     public void computeIP(String ipAdr) throws IPFormatException {
-        //
-        // ... hier muss die Routine kommen, um die Werte umzuwandeln.
-        // 1. Das Format prüfen und bei ungültigem Wert eine Exception werfen.
-        //    Exception mittels throw new IPFormatException("Fehlermeldung") auslösen.
-        //
-        //    HINWEIS: Profis werden die IP-Adresse mittels einer REGEX (regular expression)
-        //             auf deren Richtigkeit prüfen und auch gleich die Zerlegung in
-        //             4 Zahlenwerte vornehmen.
-        //             Diese Technik dürfte die aktuelle Fähigkeit der meisten Lernenden
-        //             übertreffen. Wer Lust hat.... try it.
-        //    Einfacher ist es, wenn mit den Möglichkeiten der String-Klasse gearbeitet wird.
-        //
+        List<Integer> ints;
+        String regex = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}";
+        if (ipAdr.matches(regex)) {
+            ints = Arrays.stream(ipAdr.split("\\."))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            System.out.println("splitted = " + ints);
+        } else {
+            throw new IPFormatException("Wrong format");
+        }
 
-        // 2. Den Wert umwandeln in 8-stelligen Binär- und 2-stelliegn Hexwert.
+        for (int i = 0; i < 4; i++) {
+            int num = ints.get(i);
+            hexFormat += Integer.toString(num, 16);
+            binFormat += Integer.toString(num, 2);
 
-        // 3. Alle angemeldeten Listener über die Wertänderung informieren.
+            if (i < 3) {
+                hexFormat += "-";
+                binFormat += "-";
+            }
+        }
+
         this.fireChanges();
     }
 
