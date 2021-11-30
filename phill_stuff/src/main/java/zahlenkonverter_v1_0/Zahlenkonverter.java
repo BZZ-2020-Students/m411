@@ -1,6 +1,4 @@
-package v1_0;
-
-import java.util.Scanner;
+package zahlenkonverter_v1_0;
 
 public class Zahlenkonverter {
     private Einleser einleser;

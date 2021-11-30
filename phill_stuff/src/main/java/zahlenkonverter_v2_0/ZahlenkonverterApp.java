@@ -1,10 +1,12 @@
-package v1_0;
+package zahlenkonverter_v2_0;
 
 public class ZahlenkonverterApp {
     public static void main(String[] args) {
+        String eingegebeneZahl;
         Zahlenkonverter konverter = new Zahlenkonverter();
-        konverter.Usereingaben();
-        konverter.convert();
+        eingegebeneZahl = konverter.Usereingaben();
+
+        konverter.convert(eingegebeneZahl);
         konverter.printAllNumbers();
     }
 }

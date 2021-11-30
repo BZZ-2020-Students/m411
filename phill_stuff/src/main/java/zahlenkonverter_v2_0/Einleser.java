@@ -1,4 +1,4 @@
-package v2_0;
+package zahlenkonverter_v2_0;
 
 import java.util.Scanner;
 
