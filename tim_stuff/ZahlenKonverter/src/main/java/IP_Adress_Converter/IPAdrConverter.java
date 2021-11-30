@@ -85,6 +85,9 @@ public class IPAdrConverter implements IPAdrConverterIF {
             }
         }
 
+        System.out.println("binFormat = " + binFormat);
+        System.out.println("hexFormat = " + hexFormat);
+
         this.fireChanges();
     }
 
