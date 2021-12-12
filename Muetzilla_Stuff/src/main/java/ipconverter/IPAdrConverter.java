@@ -49,23 +49,19 @@ public class IPAdrConverter implements IPAdrConverterIF {
    * @throws IPFormatException signalisiert ein ungültiges IP-Format
    */
   public void computeIP(String ipAdr) throws IPFormatException{
-      String[] binaryString = new String[ipAdr.length()];
-    //
-    // ... hier muss die Routine kommen, um die Werte umzuwandeln.
-    // 1. Das Format prüfen und bei ungültigem Wert eine Exception werfen.
-    //    Exception mittels throw new IPFormatException("Fehlermeldung") auslösen.
-    //    
-    //    HINWEIS: Profis werden die IP-Adresse mittels einer REGEX (regular expression)
-    //             auf deren Richtigkeit prüfen und auch gleich die Zerlegung in
-    //             4 Zahlenwerte vornehmen.
-    //             Diese Technik dürfte die aktuelle Fähigkeit der meisten Lernenden
-    //             übertreffen. Wer Lust hat.... try it.
-    //    Einfacher ist es, wenn mit den Möglichkeiten der String-Klasse gearbeitet wird.
-    //
-    
-    // 2. Den Wert umwandeln in 8-stelligen Binär- und 2-stelliegn Hexwert.
-    
-    // 3. Alle angemeldeten Listener über die Wertänderung informieren.
+
+    String[] splitedIpString = ipAdr.split("\\.");
+    String[] hexIpPartArray = new String[splitedIpString.length];
+    String[] binIpPartarryArray = new String[splitedIpString.length];
+
+    for (int i = 0; i < splitedIpString.length; i++) {
+      binIpPartarryArray[i] = String.format("%8s",Integer.toBinaryString(Integer.parseInt(splitedIpString[i])).replace(' ', '0'));
+      hexIpPartArray[i] = String.format("%2s",Integer.toHexString(Integer.parseInt(splitedIpString[i])).replace(' ', '0'));
+    }
+    hexFormat = String.join("-",hexIpPartArray);
+    binFormat = String.join("-", binIpPartarryArray);
+
+
     this.fireChanges();
   }
   
