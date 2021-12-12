@@ -1,4 +1,4 @@
-package ipzahlenkonverter; /**
+package ipConverter; /**
  * Hauptklasse der Anwendung IP-Adress Converter.
  * Sie instanziert alle benötigten Klassen in der main-Methode.
  * 
@@ -18,6 +18,8 @@ package ipzahlenkonverter; /**
  * @date    22.10.2016
  */
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class IPAdrConverter implements IPAdrConverterIF {
   
@@ -49,19 +51,59 @@ public class IPAdrConverter implements IPAdrConverterIF {
    * @throws IPFormatException signalisiert ein ungültiges IP-Format
    */
   public void computeIP(String ipAdr) throws IPFormatException{
-    String[] array = ipAdr.split("\\.");
-    String[] hexarray = new String[array.length];
-    String[] binarray = new String[array.length];
-    for (int i = 0; i < array.length; i++) {
-      hexarray[i] = String.format("%2s", Integer.toHexString(Integer.parseInt(array[i]))).replace(' ', '0');
-      binarray[i] = String.format("%8s", Integer.toBinaryString(Integer.parseInt(array[i]))).replace(' ', '0');
+    //
+    // ... hier muss die Routine kommen, um die Werte umzuwandeln.
+    // 1. Das Format prüfen und bei ungültigem Wert eine Exception werfen.
+    //    Exception mittels throw new IPFormatException("Fehlermeldung") auslösen.
+    //    
+    //    HINWEIS: Profis werden die IP-Adresse mittels einer REGEX (regular expression)
+    //             auf deren Richtigkeit prüfen und auch gleich die Zerlegung in
+    //             4 Zahlenwerte vornehmen.
+    //             Diese Technik dürfte die aktuelle Fähigkeit der meisten Lernenden
+    //             übertreffen. Wer Lust hat.... try it.
+    //    Einfacher ist es, wenn mit den Möglichkeiten der String-Klasse gearbeitet wird.
+    //
+
+    if (ipAdr.matches(ipRegex)) {
+      String[] strNumbers = ipAdr.split("\\.");
+      int[] numbers = new int[4];
+      int count = 0;
+      for (String str : strNumbers) {
+        numbers[count++] = Integer.parseInt(str);
+      }
+      // 2. Den Wert umwandeln in 8-stelligen Binär- und 2-stelliegn Hexwert.
+
+      binFormat = "";
+      count = 0;
+      for (int n : numbers) {
+        String tempBinary = getBinary(n);
+        for (int i = tempBinary.length(); i < 8; i++) {
+          tempBinary = "0" + tempBinary;
+        }
+        binFormat += tempBinary;
+        if (count < 3) {
+          binFormat += "-";
+          count++;
+        }
+      }
+
+      hexFormat = "";
+      count = 0;
+      for (int n : numbers) {
+        String tempHex = getHex(n);
+        for (int i = tempHex.length(); i < 2; i++) {
+          tempHex = "0" + tempHex;
+        }
+        hexFormat += tempHex;
+        if (count < 3) {
+          hexFormat += "-";
+          count++;
+        }
+      }
+
+      // 3. Alle angemeldeten Listener über die Wertänderung informieren.
+      this.fireChanges();
     }
-
-    binFormat = String.join("-", binarray);
-    hexFormat = String.join("-",hexarray);
-
-    // 3. Alle angemeldeten Listener über die Wertänderung informieren.
-    this.fireChanges();
   }
   
   /**
@@ -118,15 +160,44 @@ public class IPAdrConverter implements IPAdrConverterIF {
     IPAdrConverter conv   = new IPAdrConverter();
     IPAdrConverterGUI gui = new IPAdrConverterGUI(conv);
   }
-/*
-                               _.-="_-         _
-                         _.-="   _-          | ||"""""""---._______     __..
-             ___.===""""-.______-,,,,,,,,,,,,`-''----" """""       """""  __'
-      __.--""     __        ,'                   o \           __        [__|
- __-""=======.--""  ""--.=================================.--""  ""--.=======:
-]       [w] : /        \ : |========================|    : /        \ :  [w] :
-V___________:|          |: |========================|    :|          |:   _-"
- V__________: \        / :_|=======================/_____: \        / :__-"
- -----------'  "-____-"  `-------------------------------'  "-____-"
- */
+
+  public String getBinary(int number){
+    ArrayList<Integer> binary = new ArrayList<>();
+    String strBinary = "";
+    while(number > 0){
+      binary.add(number%2);
+      number = number/2;
+    }
+    for(int b : binary){
+      strBinary = b + strBinary;
+    }
+    return strBinary;
+  }
+
+  public String getHex(int number) {
+    String strHexadecimal = "";
+    while(number != 0)
+    {
+      int hexNumber = number % 16;
+      char charHex;
+      if(hexNumber <= 9 && hexNumber >= 0)
+      {
+        charHex = (char)(hexNumber + '0');
+      }
+      else
+      {
+        charHex = (char)(hexNumber - 10 + 'A');
+      }
+      strHexadecimal = charHex + strHexadecimal;
+      number = number / 16;
+    }
+    return strHexadecimal;
+  }
+
+    private static final String ipRegex =
+          "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                  "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                  "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
+                  "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+
 }
