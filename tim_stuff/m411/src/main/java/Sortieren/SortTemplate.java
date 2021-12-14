@@ -43,7 +43,7 @@ public class SortTemplate {
                         startTime = new Date().getTime();
                         Quicksort.quickSort(unsortedArray);
                         endTime = new Date().getTime() - startTime;
-                        System.out.println("Dauer des Quicksorts: " + endTime + "ms");
+                        System.out.println("Dauer des Quicksorts (pivot am ende): " + endTime + "ms");
                     }
                     case 3 -> {
                         startTime = new Date().getTime();
