@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class SortTemplate {
     private final int SIZE = 50000;
-    private final int RANGE = 100000000;
 
     SortTemplate() {
         Random rand = new Random();
@@ -14,6 +13,7 @@ public class SortTemplate {
         int[] unsortedArray3 = new int[SIZE];
         int[] unsortedArray4 = new int[SIZE];
         for (int i = 0; i < unsortedArray1.length; i++) {
+            int RANGE = 100000000;
             int num = rand.nextInt(RANGE);
             unsortedArray1[i] = num;
             unsortedArray2[i] = num;
@@ -21,22 +21,27 @@ public class SortTemplate {
             unsortedArray4[i] = num;
         }
         long startTime;
+        long endTime;
 
         startTime = new Date().getTime();
         bubbleSort(unsortedArray1);
-        System.out.println("Dauer der bubble Sortierung: " + (new Date().getTime() - startTime) + "ms");
+        endTime = new Date().getTime() - startTime;
+        System.out.println("Dauer der bubble Sortierung: " + endTime + "ms");
 
         startTime = new Date().getTime();
         bubbleSortOptimized(unsortedArray2);
-        System.out.println("Dauer der bubble Sortierung (Optimiert): " + (new Date().getTime() - startTime) + "ms");
+        endTime = new Date().getTime() - startTime;
+        System.out.println("Dauer der bubble Sortierung (Optimiert): " + endTime + "ms");
 
         startTime = new Date().getTime();
         Quicksort.quickSort(unsortedArray3);
-        System.out.println("Dauer des Quicksorts: " + (new Date().getTime() - startTime) + "ms");
+        endTime = new Date().getTime() - startTime;
+        System.out.println("Dauer des Quicksorts: " + endTime + "ms");
 
         startTime = new Date().getTime();
         Quicksort.quickSortRandomPivot(unsortedArray4);
-        System.out.println("Dauer des Quicksorts (random pivot): " + (new Date().getTime() - startTime) + "ms");
+        endTime = new Date().getTime() - startTime;
+        System.out.println("Dauer des Quicksorts (random pivot): " + endTime + "ms");
     }
 
     public static void main(String[] args) {
