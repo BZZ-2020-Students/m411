@@ -4,44 +4,56 @@ import java.util.Date;
 import java.util.Random;
 
 public class SortTemplate {
-    private final int SIZE = 50000;
+    private int SIZE;
 
     SortTemplate() {
-        Random rand = new Random();
-        int[] unsortedArray1 = new int[SIZE];
-        int[] unsortedArray2 = new int[SIZE];
-        int[] unsortedArray3 = new int[SIZE];
-        int[] unsortedArray4 = new int[SIZE];
-        for (int i = 0; i < unsortedArray1.length; i++) {
-            int RANGE = 100000000;
-            int num = rand.nextInt(RANGE);
-            unsortedArray1[i] = num;
-            unsortedArray2[i] = num;
-            unsortedArray3[i] = num;
-            unsortedArray4[i] = num;
+        int[] testSizes = {10, 100, 1000, 10000, 50000, 100000};
+        for (int testSize : testSizes) {
+            SIZE = testSize;
+
+            System.out.println();
+            System.out.println("---------------------------------------------");
+            System.out.println("Test grösse = " + SIZE);
+
+            for (int i = 0; i < 4; i++) {
+                Random rand = new Random();
+                int[] unsortedArray = new int[SIZE];
+                for (int j = 0; j < unsortedArray.length; j++) {
+                    int RANGE = 100000000;
+                    int num = rand.nextInt(RANGE);
+                    unsortedArray[j] = num;
+                }
+                long startTime;
+                long endTime;
+
+                switch (i) {
+                    case 0 -> {
+                        startTime = new Date().getTime();
+                        bubbleSort(unsortedArray);
+                        endTime = new Date().getTime() - startTime;
+                        System.out.println("Dauer der bubble Sortierung: " + endTime + "ms");
+                    }
+                    case 1 -> {
+                        startTime = new Date().getTime();
+                        bubbleSortOptimized(unsortedArray);
+                        endTime = new Date().getTime() - startTime;
+                        System.out.println("Dauer der bubble Sortierung (Optimiert): " + endTime + "ms");
+                    }
+                    case 2 -> {
+                        startTime = new Date().getTime();
+                        Quicksort.quickSort(unsortedArray);
+                        endTime = new Date().getTime() - startTime;
+                        System.out.println("Dauer des Quicksorts: " + endTime + "ms");
+                    }
+                    case 3 -> {
+                        startTime = new Date().getTime();
+                        Quicksort.quickSortRandomPivot(unsortedArray);
+                        endTime = new Date().getTime() - startTime;
+                        System.out.println("Dauer des Quicksorts (random pivot): " + endTime + "ms");
+                    }
+                }
+            }
         }
-        long startTime;
-        long endTime;
-
-        startTime = new Date().getTime();
-        bubbleSort(unsortedArray1);
-        endTime = new Date().getTime() - startTime;
-        System.out.println("Dauer der bubble Sortierung: " + endTime + "ms");
-
-        startTime = new Date().getTime();
-        bubbleSortOptimized(unsortedArray2);
-        endTime = new Date().getTime() - startTime;
-        System.out.println("Dauer der bubble Sortierung (Optimiert): " + endTime + "ms");
-
-        startTime = new Date().getTime();
-        Quicksort.quickSort(unsortedArray3);
-        endTime = new Date().getTime() - startTime;
-        System.out.println("Dauer des Quicksorts: " + endTime + "ms");
-
-        startTime = new Date().getTime();
-        Quicksort.quickSortRandomPivot(unsortedArray4);
-        endTime = new Date().getTime() - startTime;
-        System.out.println("Dauer des Quicksorts (random pivot): " + endTime + "ms");
     }
 
     public static void main(String[] args) {
