@@ -1,5 +1,6 @@
 package Sortieren;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -10,13 +11,14 @@ public class SortTemplate {
         int[] testSizes = {10, 100, 1000, 10000, 50000, 100000};
         for (int testSize : testSizes) {
             SIZE = testSize;
+            long seed = System.currentTimeMillis();
 
             System.out.println();
             System.out.println("---------------------------------------------");
             System.out.println("Test grösse = " + SIZE);
 
             for (int i = 0; i < 4; i++) {
-                Random rand = new Random();
+                Random rand = new Random(seed);
                 int[] unsortedArray = new int[SIZE];
                 for (int j = 0; j < unsortedArray.length; j++) {
                     int RANGE = 100000000;
