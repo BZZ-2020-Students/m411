@@ -30,7 +30,7 @@ public class legosort {
 
     private void sort() {
         for (int i = 0; i < unsortedArray.length; i++) {
-            for (int j = 0; j < (unsortedArray.length - 1 - i); j++) {
+            for (int j = 0; j < (unsortedArray.length - 1-i); j++) {
                 if (unsortedArray[j] <= unsortedArray[j + 1]) {
                     int speicher = unsortedArray[j];
                     unsortedArray[j] = unsortedArray[j+1];
