@@ -1,0 +1,108 @@
+[Files]
+File0=IPAdrConverter.java
+File1=IPAdrConverterGUI.java
+File2=IPAdrConverterIF.java
+File3=IPAdrConverterListener.java
+File4=IPFormatException.java
+
+[Box:  - IPAdrConverter]
+X=867
+Y=318
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Box:  - IPAdrConverterGUI]
+X=425
+Y=225
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Box:  - IPAdrConverterGUI$1]
+X=257
+Y=532
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Box:  - IPAdrConverterGUI$2]
+X=512
+Y=531
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Box:  - IPAdrConverterIF]
+X=858
+Y=21
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Box:  - IPAdrConverterListener]
+X=483
+Y=22
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Box:  - IPFormatException]
+X=1346
+Y=427
+MinVis=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+FontSize=10
+FontName=MS Sans Serif
+
+[Diagram]
+comments=0
+OffsetX=0
+OffsetY=0
+Visibility=0
+ShowParameter=4
+SortOrder=0
+ShowIcons=0
+ShowConnections=1
+Fontname=MS Sans Serif
+Fontsize=10
+ShowObjectDiagram=0
+
+[Connections]
+V0=IPAdrConverter#IPAdrConverterIF#Implements####0#0#0
+V1=IPAdrConverter#IPAdrConverterListener#Aggregation####0#0#0
+V2=IPAdrConverterGUI#IPAdrConverterListener#Implements####0#0#0
+V3=IPAdrConverterGUI#IPAdrConverterIF#AssociationDirected####0#0#0
+V4=IPAdrConverterGUI#IPAdrConverterGUI$1#AssociationDirected####0#0#0
+V5=IPAdrConverterGUI#IPAdrConverterGUI$2#AssociationDirected####0#0#0
+V6=IPAdrConverter#IPFormatException#AssociationDirected####0#0#0
+
+[Interactive]
+I0=
+
+[Window]
+Left=150
+Top=160
+Width=1710
+Height=454
+
