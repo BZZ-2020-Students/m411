@@ -1,16 +1,16 @@
 package ipConverter; /**
  * Hauptklasse der Anwendung IP-Adress Converter.
- * Sie instanziert alle benötigten Klassen in der main-Methode.
+ * Sie instanziert alle benï¿½tigten Klassen in der main-Methode.
  * 
- * Über die Methode computeIP() wird eine IP-Adresse im Format
- * 192.168.1.1 geliefert. Diese wird danach in ein binäres und ein
- * hexadezimales Format übersetzt.
- * Nach der Berechnung werden alle angemeldeten Listener (müssen das
- * Interface IPAdrConverterListener implementieren) über die
- * Methode update() informiert, dass eine Änderung der Datenwerte 
+ * ï¿½ber die Methode computeIP() wird eine IP-Adresse im Format
+ * 192.168.1.1 geliefert. Diese wird danach in ein binï¿½res und ein
+ * hexadezimales Format ï¿½bersetzt.
+ * Nach der Berechnung werden alle angemeldeten Listener (mï¿½ssen das
+ * Interface IPAdrConverterListener implementieren) ï¿½ber die
+ * Methode update() informiert, dass eine ï¿½nderung der Datenwerte 
  * stattgefunden hat.
  * 
- * Mit den Methoden getIPAdrBinFormat() und getIPAdrHexFormat() können
+ * Mit den Methoden getIPAdrBinFormat() und getIPAdrHexFormat() kï¿½nnen
  * die Listener die Datenwerte abfragen.
  * 
  * @author  B163AAL
@@ -27,10 +27,10 @@ public class IPAdrConverter implements IPAdrConverterIF {
   private String binFormat, hexFormat;
 
   /**
-   * Erstellt die Hauptklasse für die Umrechunung einer IP-Adresse in ein
-   * binäres bzw. hexadezimales Format.
+   * Erstellt die Hauptklasse fï¿½r die Umrechunung einer IP-Adresse in ein
+   * binï¿½res bzw. hexadezimales Format.
    * 
-   * Für die Registrierung der Listener wird ein Vector vorbereitet.
+   * Fï¿½r die Registrierung der Listener wird ein Vector vorbereitet.
    * 
    */
   public IPAdrConverter(){
@@ -38,30 +38,30 @@ public class IPAdrConverter implements IPAdrConverterIF {
   }
   
   /**
-   * Diese Methode wird vom Listener aufgerufen, um eine Stringrepräsentation einer
+   * Diese Methode wird vom Listener aufgerufen, um eine Stringreprï¿½sentation einer
    * IP-Adresse in klassischem IP-V4 Format umzurechnen.
    * 
-   * Die Methode prüft den String auf seine Gültigkeit. Im Fehlerfall wird eine
+   * Die Methode prï¿½ft den String auf seine Gï¿½ltigkeit. Im Fehlerfall wird eine
    * Exception geworfen.
    * 
    * Kann der Wert umgewandelt werden, ruft diese Methode die Update-Methode
    * des IPAdrConverterListener auf.
    * 
    * @param ipAdr eine IP-Adresse im klassischen IP-V4 Format
-   * @throws IPFormatException signalisiert ein ungültiges IP-Format
+   * @throws IPFormatException signalisiert ein ungï¿½ltiges IP-Format
    */
   public void computeIP(String ipAdr) throws IPFormatException{
     //
     // ... hier muss die Routine kommen, um die Werte umzuwandeln.
-    // 1. Das Format prüfen und bei ungültigem Wert eine Exception werfen.
-    //    Exception mittels throw new IPFormatException("Fehlermeldung") auslösen.
+    // 1. Das Format prï¿½fen und bei ungï¿½ltigem Wert eine Exception werfen.
+    //    Exception mittels throw new IPFormatException("Fehlermeldung") auslï¿½sen.
     //    
     //    HINWEIS: Profis werden die IP-Adresse mittels einer REGEX (regular expression)
-    //             auf deren Richtigkeit prüfen und auch gleich die Zerlegung in
+    //             auf deren Richtigkeit prï¿½fen und auch gleich die Zerlegung in
     //             4 Zahlenwerte vornehmen.
-    //             Diese Technik dürfte die aktuelle Fähigkeit der meisten Lernenden
-    //             übertreffen. Wer Lust hat.... try it.
-    //    Einfacher ist es, wenn mit den Möglichkeiten der String-Klasse gearbeitet wird.
+    //             Diese Technik dï¿½rfte die aktuelle Fï¿½higkeit der meisten Lernenden
+    //             ï¿½bertreffen. Wer Lust hat.... try it.
+    //    Einfacher ist es, wenn mit den Mï¿½glichkeiten der String-Klasse gearbeitet wird.
     //
 
     if (ipAdr.matches(ipRegex)) {
@@ -71,7 +71,7 @@ public class IPAdrConverter implements IPAdrConverterIF {
       for (String str : strNumbers) {
         numbers[count++] = Integer.parseInt(str);
       }
-      // 2. Den Wert umwandeln in 8-stelligen Binär- und 2-stelliegn Hexwert.
+      // 2. Den Wert umwandeln in 8-stelligen Binï¿½r- und 2-stelliegn Hexwert.
 
       binFormat = "";
       count = 0;
@@ -101,14 +101,14 @@ public class IPAdrConverter implements IPAdrConverterIF {
         }
       }
 
-      // 3. Alle angemeldeten Listener über die Wertänderung informieren.
+      // 3. Alle angemeldeten Listener ï¿½ber die Wertï¿½nderung informieren.
       this.fireChanges();
     }
   }
   
   /**
-   * Diese Methode liefert die binäre Darstellung einer IP-Adresse
-   * @return IP-Adresse im Binärformat
+   * Diese Methode liefert die binï¿½re Darstellung einer IP-Adresse
+   * @return IP-Adresse im Binï¿½rformat
    */
   public String getIPAdrBinFormat(){
     return binFormat;
@@ -124,9 +124,9 @@ public class IPAdrConverter implements IPAdrConverterIF {
   
   
   /** 
-   * Fügt einen Listener zu.
-   * Der Listener wird in einer Liste eingetragen und bei einer Wertänderung
-   * über die Methode update() informiert.
+   * Fï¿½gt einen Listener zu.
+   * Der Listener wird in einer Liste eingetragen und bei einer Wertï¿½nderung
+   * ï¿½ber die Methode update() informiert.
    * @param l ein Listener-Objekt
    */
   public void addIPAdrConverterListener(IPAdrConverterListener l){
@@ -142,8 +142,8 @@ public class IPAdrConverter implements IPAdrConverterIF {
   }
   
   /*
-   * Bei einer Änderung der Daten werden alle aktuellen 
-   * Listener über diese Änderung informiert.
+   * Bei einer ï¿½nderung der Daten werden alle aktuellen 
+   * Listener ï¿½ber diese ï¿½nderung informiert.
    */
   private void fireChanges(){
     for (IPAdrConverterListener l : listener){
@@ -153,7 +153,7 @@ public class IPAdrConverter implements IPAdrConverterIF {
   
 
   /**
-   * Erzeugt die Applikation mit den Klassen für Datenmodel und GUI.
+   * Erzeugt die Applikation mit den Klassen fï¿½r Datenmodel und GUI.
    * @param args
    */
   public static void main(String[] args){
